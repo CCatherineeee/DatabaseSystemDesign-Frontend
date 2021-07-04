@@ -6,15 +6,17 @@ Vue.use(VueRouter)
 const routes = [
 
   {
-    path: '/',
+    path: '/UserPage',
     name: 'UserPage',
     component:UserPage,
     children:[
     //redirect:'/User_MyActivity.vue',
       {path:'/activity',component:()=>import('../views/activity.vue')},
-     {path:'/follow',component:()=>import('../views/follow.vue')},
+      {path:'/follow',component:()=>import('../views/follow.vue')},
       {path:'/info',component:()=>import('../views/Info.vue')},
       {path:'/history',component:()=>import('../views/history.vue')},
+      {path:'/message',component:()=>import('../views/message.vue')},
+      {path:'/favorite',component:()=>import('../views/favorite.vue')},
     ]
   },
   {
@@ -31,3 +33,4 @@ const router = new VueRouter({
 })
 
 export default router
+

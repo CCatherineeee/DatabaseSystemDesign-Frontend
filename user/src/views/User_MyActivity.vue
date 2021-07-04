@@ -5,25 +5,22 @@
     <img src="..\assets\1.jpg" height="100px" style="border-radius:50%"/>
 
 
-    <el-menu :default-active="this.$route.path">
+    <el-menu :default-active="info" router="true">
 
-      <el-menu-item index="User">
-
-      <span slot="title" @click="toInfo()">MY INFORMATION</span>
-    </el-menu-item>
-
-      <el-menu-item index="/activity" >
-
-        <span slot="title" @click="toActivity()">MY ACTIVITY</span>
+      <el-menu-item index="info">
+        MY INFORMATION
       </el-menu-item>
-      <el-menu-item index="2">
-        <span slot="title" @click="toFollow()"> My FOLLOW</span>
-      </el-menu-item>
-      <el-menu-item index="3">
 
-        <span slot="title" @click="toViewhistory()">MY VIEW HISTORY</span>
-        
-      </el-menu-item> 
+      <el-menu-item index="message">MY MESSAGE</el-menu-item>
+
+      <el-menu-item index="favorite">MY FAVORITE</el-menu-item>
+
+      <el-menu-item index="activity" >MY ACTIVITY</el-menu-item>
+
+      <el-menu-item index="follow">My FOLLOW</el-menu-item>
+
+      <el-menu-item index="history">MY VIEW HISTORY</el-menu-item> 
+
     </el-menu>
   </el-aside>
 
@@ -52,6 +49,12 @@ export default {
       },
       toViewhistory(){
         this.$router.push({path:'history'})
+      },
+      toMessage(){
+        this.$router.push({path:'message'})
+      },
+      toFavorite(){
+        this.$router.push({path:'favorite'})
       }
   }
 }
@@ -67,5 +70,4 @@ export default {
 }
 
 </style>
-
 

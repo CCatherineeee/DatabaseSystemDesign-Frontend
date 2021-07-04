@@ -1,11 +1,21 @@
 <template>
+
   <div id="app">
-
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-
-    </div>
-    <router-view/>
+    <el-row>
+  <div style="float:right;">
+    <el-menu :default-active="main" class="el-menu-demo" mode="horizontal" @select="handleSelect" router="true">
+      <el-menu-item index="main">首页</el-menu-item>
+      <el-menu-item index="posted">帖子</el-menu-item>
+       <el-submenu index="top">
+         <template #title>个人中心</template>
+          <el-menu-item index="top-1">登录</el-menu-item>
+          <el-menu-item index="/UserPage">个人资料</el-menu-item>
+          <el-menu-item index="top-3">注销</el-menu-item>
+        </el-submenu>
+    </el-menu>
+  </div>
+    </el-row>
+      <router-view/>
   </div>
 </template>
 
