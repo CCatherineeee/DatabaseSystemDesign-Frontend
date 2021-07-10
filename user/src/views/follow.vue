@@ -17,39 +17,41 @@
     </el-table-column>
     <el-table-column
       prop="fans"
-      label="粉丝">
+      label="粉丝"
+      width="180">
+
+    </el-table-column>
+    <el-table-column>
+      <template >
+        <el-button type="text" size="small">查看</el-button>
+        <el-button type="text" size="small">编辑</el-button>
+      </template>
     </el-table-column>
   </el-table>
+  
 
 </template>
 
 
 <script>
+import axios from 'axios'
   export default {
+    mounted:{
+      GetData:function()
+      {
+        axios.post('https://139.196.167.75:5001/api/TodoItems',{name:"hello"});
+      }
+    },
+    methods:{
+      
+    },
     data() {
+
       return {
-        tableData: [{
-          
-          userid: '2016-05-02',
-          name: '王小虎',
-          fans: '0'
-        }, {
-         
-          userid: '2016-05-04',
-          name: '王小虎',
-          fans: '0'
-        }, {
-           
-          userid: '2016-05-01',
-          name: '王小虎',
-          fans: '0'
-        }, {
-         
-          userid: '2016-05-03',
-          name: '王小虎',
-          fans: '0'
-        }]
+        tableData: []
       }
     }
+    
+    
   }
 </script>

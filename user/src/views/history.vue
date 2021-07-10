@@ -1,7 +1,7 @@
 <template>
 
 <el-row>
-  <el-col :span="4" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0">
+  <el-col :span="4"  v-for="(o, index) in 8" :key="o" :offset="index % 4 > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px' }">
       
       <div style="padding: 14px;">

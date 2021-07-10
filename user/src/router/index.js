@@ -1,31 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import UserPage from '../views/User_MyActivity.vue'
+import UserPage from '../views/UserPage.vue'
+import EditInfo from '../views/EditInfo.vue'
+import UserZoon from '../views/UserZoon.vue'
 Vue.use(VueRouter)
 
 const routes = [
-
   {
-    path: '/UserPage',
-    name: 'UserPage',
-    component:UserPage,
+    path:'/UserZoon',
+    name:'UserZoon',
+    component:UserZoon,
     children:[
-    //redirect:'/User_MyActivity.vue',
-      {path:'/activity',component:()=>import('../views/activity.vue')},
+      {path:'/UserPage',component:UserPage,children:[
+        {path:'/activity',component:()=>import('../views/activity.vue')},
       {path:'/follow',component:()=>import('../views/follow.vue')},
-      {path:'/info',component:()=>import('../views/Info.vue')},
       {path:'/history',component:()=>import('../views/history.vue')},
       {path:'/message',component:()=>import('../views/message.vue')},
       {path:'/favorite',component:()=>import('../views/favorite.vue')},
+      ]},
+      {path:'/EditInfo',component:EditInfo}
     ]
   },
-  {
-    path: '/redirct', // 重定向路由
-    // component: () => import('@/views/layout/components/Sidebar/redirect'), hidden: true
-    //component: Layout,
-    //hidden: true,
-      component: () => import('@/views/redirct.vue')
-}
+
 ]
 
 const router = new VueRouter({
