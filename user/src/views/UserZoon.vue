@@ -2,12 +2,12 @@
 
 <div>
    
-  <div>
+<div>
 <el-container  style="height: 500px; border: 1px solid #eee">
 <el-aside width="300px" class="asid">
   <br>
     <img src="..\assets\1.jpg" height="180px" width="180px" style="border-radius:50%"/>
-    <p><b>{{UserName}}</b></p>
+    <p><b> {{UserName}} </b></p>
     <el-menu   :router="true" :default-active="$path='/UserPage'" :collapse-transition="true">
       <el-menu-item index="UserPage" >我的主页</el-menu-item>
       <el-menu-item index="EditInfo">修改个人资料</el-menu-item>
@@ -16,6 +16,7 @@
 <el-main>
 
   <div>
+    <button @click="postData('http://175.27.240.116:5000/api/TodoItems')"></button>
       <transition name="slide-fade">
       <!--路由占位符-->
       <router-view></router-view>
@@ -34,8 +35,25 @@ export default {
     EditInfo:function()
     {
       this.$router.replace({path: '/EditInfo'})
-    }
-  },
+    },
+    postData:function(url)
+      {
+        const item = {
+          Id:1,
+          Name: "123",
+          IsComplete: true};
+        fetch(url, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+          });
+          console.log("posted");
+        }
+        
+      },
   data()
   {
     return{

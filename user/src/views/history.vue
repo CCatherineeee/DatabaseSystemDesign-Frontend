@@ -9,7 +9,6 @@
         <h4>帖子名</h4>
         <p>主楼内容</p>
         <div class="bottom clearfix">
-          <time class="time">{{ currentDate }}</time>
           <el-button type="text" class="button">打开帖子</el-button>
         </div>
       </div>

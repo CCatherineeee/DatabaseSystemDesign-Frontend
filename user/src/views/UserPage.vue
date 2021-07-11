@@ -3,7 +3,6 @@
 <el-menu  class="el-menu-demo" mode="horizontal" :router = "true">
       <el-menu-item index="activity">我的活动</el-menu-item>
       <el-menu-item index="history">我的历史</el-menu-item>
-       <el-menu-item index="message">我的消息</el-menu-item>
        <el-menu-item index="favorite">我的收藏</el-menu-item>
        <el-menu-item index="follow">我的关注</el-menu-item>
        <el-menu-item index="fans">我的粉丝</el-menu-item>

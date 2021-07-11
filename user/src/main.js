@@ -17,7 +17,7 @@ Vue.use(ElementUI)
 
 Vue.prototype.$axios = axios;//把axios挂载到vue上
 
-Vue.config.productionTip = true
+Vue.config.productionTip = false
 
 //Vue.prototype.$api = Api;
 

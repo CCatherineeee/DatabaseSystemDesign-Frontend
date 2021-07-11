@@ -28,22 +28,36 @@
       </template>
     </el-table-column>
   </el-table>
-  
 
 </template>
 
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
   export default {
     mounted:{
       GetData:function()
       {
-        axios.post('https://139.196.167.75:5001/api/TodoItems',{name:"hello"});
+        //axios.post('https://139.196.167.75:5001/api/TodoItems',{name:"hello"});
       }
     },
     methods:{
-      
+      postData:function(url)
+      {
+        const item = {
+          Id:1,
+          Name: "123",
+          IsComplete: true};
+        fetch(url, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+          });
+          console.log("posted");
+        }
     },
     data() {
 

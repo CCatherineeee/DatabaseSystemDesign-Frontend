@@ -3,8 +3,8 @@
 <el-row>
 
     <br>
-    <el-row gutter="6">
-  <el-col :span="10" offset="2"><div class="grid-content bg-purple-light">
+    <el-row gutter= 6>
+  <el-col :span= 10 offset = 2 ><div class="grid-content bg-purple-light">
       <el-form ref="form" :model="form" label-width="80px" >
     <el-form-item label="用户昵称">
         <el-input v-model="form.name"></el-input>
@@ -18,7 +18,7 @@
   </el-form-item>
 
   <el-form-item label="出生日期">
-    <el-col :span="11">
+    <el-col :span= 11 >
       <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
     </el-col>
   </el-form-item>
@@ -41,7 +41,7 @@
   </el-form-item>
 </el-form>
 </div></el-col>
-  <el-col :span="8">
+  <el-col :span= 8 >
       <img src="..\assets\1.jpg" height="180px" width="180px" style="border-radius:50%"/>
       <el-upload
             class="avatar-uploader"
@@ -62,7 +62,7 @@
 
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 //import func from 'vue-editor-bridge';
  export default {
     data() {
@@ -82,8 +82,8 @@ import axios from 'axios'
     methods: {
       onSubmit:function() {
         this.getInfo();
-        axios.get("url")
-        .then()
+        //axios.post('https://139.196.167.75:5001/api/TodoItems',{Id:1,Name:"123",IsComplete: true});
+        this.postData('https://175.27.240.116:5000/api/TodoItems');
         console.log('submit!');
 
       },
@@ -93,8 +93,26 @@ import axios from 'axios'
       },
       returnUser:function()
       {
-          this.$router.replace({path: '/UserPage'})
+          this.$router.replace({path: '/UserPage'});
+      },
+      postData:function(url)
+      {
+        const item = {
+          Id:1,
+          Name: "123",
+          IsComplete: true};
+        fetch(url, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+          });
+          console.log("posted");
+        }
+        
       }
-    }
+    
   }
 </script>
