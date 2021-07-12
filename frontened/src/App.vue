@@ -22,7 +22,7 @@
         </el-submenu>
        <el-submenu index="top">
          <template #title>个人中心</template>
-            <el-menu-item index="/LoginPage">登录/注册</el-menu-item>
+            <el-menu-item index="/Login">登录/注册</el-menu-item>
             <el-menu-item index="/activity">个人主页</el-menu-item>
             <el-menu-item index="Logout">注销</el-menu-item>
         </el-submenu>

@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div class="app">
+    <div id="nav" >
+      <router-link to="/Login" style="font-size:25px;">登录账户</router-link> |
+      <router-link to="/Register" style="font-size:25px;">注册账户</router-link>
+    </div>
     <div id="nav" v-if="$route.meta.ifShow==true">
       <router-link to="/login" style="font-size:25px;">登录账户</router-link> |
       <router-link to="/register" style="font-size:25px;">注册账户</router-link>
@@ -16,9 +20,6 @@
           <el-form-item label="密码" prop="pass" style="padding: auto;">
             <el-input type="password" placeholder="请输入密码" v-model="ruleForm.password" autocomplete="off"></el-input>
           </el-form-item>
-  <!--      <el-form-item label="年龄" prop="age">-->
-  <!--        <el-input v-model.number="ruleForm.age"></el-input>-->
-  <!--      </el-form-item>-->
           <div style="margin-top:40px;">
             <el-button type="primary" @click="submitLoginForm('ruleForm')">立即登录</el-button>
             <el-button>忘记密码</el-button>
@@ -30,8 +31,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
-import axios from 'axios'
   export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -52,10 +51,7 @@ import axios from 'axios'
       }
     };
     return {
-      ruleForm: {
-        user: '',
-        password: '',
-      },
+      ruleForm: [],
       rules: {
         user: [
           { validator: validatePass, trigger: 'blur' }
@@ -72,26 +68,29 @@ import axios from 'axios'
   },
   methods: {
     submitLoginForm() {
-      //this.$message.success("登录成功");
-      //this.$router.push({path: "/"});
-      //alert('登录成功')
-      axios.get('/user.json')
-      .then(res => {
-        const data = res.data
-        const users = []
-        for(let key in data) {
-          const getUser = data[key]
-          users.push(getUser)
-        }
-        let result = users.filter((getUser) => {
-          //console.log(getUser)
-          return getUser.userID === this.ruleForm.user && getUser.password === this.ruleForm.password
+      const formData = {
+          userID: this.ruleForm.user,
+          userName: this.ruleForm.password,
+        };
+        fetch('http://139.196.167.75:5000/api/TodoItems', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
         })
-        console.log(result)
-        if(result.length > 0) {
-          this.$router.push({name:'BrowsePost'})
-        }
-      })
+          .then(
+            res => {
+              if(res.ok){console.log(res)}
+              else
+              {
+                alert("登录失败");}
+              }
+            //this.$router.push({name:'Login'})
+            )
+            .catch(error => console.log('error is', error));//跳转到登录页面
+        alert('提交成功');
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
@@ -154,7 +153,7 @@ import axios from 'axios'
     background-color:rgba(217, 254, 255, 0.6);
     border-radius: 30px;
     width: 30%;
-    height: 40%;
+    height: 200px;
     margin: 0 auto;
     margin-top: 20px;
     padding: 6% 4%;
@@ -166,7 +165,7 @@ import axios from 'axios'
     text-align: center;
   }
 
-  #app {
+  .app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

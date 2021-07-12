@@ -10,8 +10,9 @@
         <p>主楼内容</p>
         <div class="bottom clearfix">
           <el-button type="text" class="button">打开帖子</el-button>
+          <td></td>
           <el-popconfirm title="这是一段内容确定删除吗？" @click="test">
-            <el-button slot="reference">删除</el-button>
+          <el-button type="text" slot="reference">删除</el-button>
         </el-popconfirm>
 
   

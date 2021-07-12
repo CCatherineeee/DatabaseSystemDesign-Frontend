@@ -1,5 +1,5 @@
 <template>
-    <div class="BrowsePost" style="margin:auto;height: 800px;text-align:center; background-image: url(https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png); background-repeat:repeat-y;">
+    <div style="margin:auto;height: auto;text-align:center; background-image: url(https://static.zhihu.com/heifetz/assets/sign_bg.db29b0fb.png); background-repeat:repeat;">
     <div class="back">
       <br>
      
@@ -10,8 +10,7 @@
         <el-carousel height="200px" type="card" >
           <el-carousel-item v-for="(item,index) in hotbar" :key="index" class="shadow">
 
-           
-            <img :src = "item.viewRouter" height="100%"/>
+          <img :src = "item.viewRouter" height="100%" @click="toBar()"/>
           </el-carousel-item>
         </el-carousel>
         </el-col>
@@ -39,7 +38,7 @@
        <br>
      <el-container>
 
-    <el-container style="height:500px">
+    <el-container style="height:500px;float:left">
       
       <el-aside width="250px" class="left">
           <el-container class="asid-rank">
@@ -59,10 +58,11 @@
                 <el-divider></el-divider>
 
       </el-aside>
+    </el-container>
       <el-scrollbar style="height:100%;">
         <el-scrollbar>
            <div class="flex-content">
-      <el-main>
+      <el-main style="width:auto;">
         <el-row>
         <div style="float:left;">
         <b>推荐贴吧</b>
@@ -70,13 +70,12 @@
         <div style="float:right;font-size:2px" class="barTitle">
           <b>更多</b>
         </div>
-        </el-row>
-                
+        </el-row> 
         <br>
-        <el-container>
+        <el-container style="width:auto">
 
         <el-row>
-        <el-container>
+        <el-container >
           <el-row  v-for="(item,index) in bar" :key="index">
             <el-container class="block" style="width:460px;height:190px;">
               <el-aside style="width:160px">
@@ -139,7 +138,6 @@
       
       </el-scrollbar>
       
-     </el-container>
      </el-container>
     
      </div>
@@ -213,9 +211,9 @@ export default {
       }
   },
   methods:{
-    toBar:function(url)
+    toBar:function()
     {
-      this.$router.replace(url);
+      this.$router.replace({path:'/BarPage'});
     },
     test:function(data)
     {
@@ -234,7 +232,8 @@ export default {
     checkLogin:function()
     {
       return this.IsLogin;
-    }
+    },
+
   }
 }
 
@@ -260,7 +259,7 @@ export default {
   
 }
 .asid-rank{
-  background-color:  rgba(69, 169, 250, .568);
+  background-color:  rgba(69, 169, 250, .7);
   background: #ffffffab;
   border-radius:25px;
   height: 300px;
@@ -297,6 +296,7 @@ export default {
 }
 .el-scrollbar__wrap {
     overflow-x: hidden;
+    overflow-y: hidden;
     
 }
 </style>

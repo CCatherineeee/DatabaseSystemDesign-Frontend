@@ -9,7 +9,9 @@ import priMessage from '../Message/priMessa.vue'
 import MessagePage from '../Message/MessagePage.vue'
 import Home from '../MainPage/Home.vue'
 import SearchPage from '../MainPage/Search.vue'
-//import LoginPage from '../MainPage/Login.vue'
+import BarPage from '../MainPage/bar.vue'
+import Login from '../MainPage/Login.vue'
+import Register from '../MainPage/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -49,6 +51,21 @@ const routes = [
       {path:'/priMessage',component:priMessage},
       
     ]
+  },
+  {
+    path:'/BarPage',
+    name:'BarPage',
+    component:BarPage
+  },  
+  {
+    path:'/Login',
+    name:'Login',
+    component:Login,
+  },  
+  {
+    path:'/Register',
+    name:'Register',
+    component:Register,
   },
   
 
