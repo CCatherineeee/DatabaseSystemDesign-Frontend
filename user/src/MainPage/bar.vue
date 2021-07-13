@@ -6,7 +6,7 @@
 
   <el-container >
           <el-aside width="200px" style="padding:20px;" >
-          <el-container style="background:white;">
+          <el-container style="background:white;" class>
             <el-main>
 
               <p><b>贴吧介绍</b></p>
@@ -62,7 +62,7 @@
             </el-row>
             <el-row>
               <br>
-                <el-button type="primary" style="float:left" @click="onSubmit">发表</el-button>
+                <el-button type="primary" style="float:left" @click="onSubmit()">发表</el-button>
             </el-row>
             </div>
            </el-main>
@@ -132,6 +132,16 @@
         barTitle:"hello",
         barIntro:"",
         barImgUrl:require('..\\assets\\1.jpg')
+      }
+    },
+    mounted()
+    {
+      this.getParams();
+    },
+    methods:{
+      getParams()
+      {
+        console.log(this.$route.params)
       }
     }
   };

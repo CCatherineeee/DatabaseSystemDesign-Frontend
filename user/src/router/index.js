@@ -13,7 +13,11 @@ import BarPage from '../MainPage/bar.vue'
 import Login from '../MainPage/Login.vue'
 import Register from '../MainPage/Register.vue'
 import redirct from '../views/redirct.vue'
-
+import AddAn from '../Announcement/AddAnn.vue'
+import Ann from '../Announcement/Ann.vue'
+import hisUserPage from '../lookUser/hisUserZoon.vue'
+import hisLeaveMes from '../lookUser/hisLeaveMes.vue'
+import creatBar from '../MainPage/createBar.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,10 +27,11 @@ const routes = [
     component:UserZoon,
     children:[
       {path:'/UserPage',component:UserPage,children:[
-        {path:'/activity',component:()=>import('../views/activity.vue')},
+      {path:'/activity',component:()=>import('../views/activity.vue')},
       {path:'/follow',component:()=>import('../views/follow.vue')},
       {path:'/history',component:()=>import('../views/history.vue')},
       {path:'/favorite',component:()=>import('../views/favorite.vue')},
+      {path:'/fans',component:()=>import('../views/fans.vue')},
       ]},
       {path:'/EditInfo',component:EditInfo}
     ]
@@ -35,6 +40,11 @@ const routes = [
     path:'/',
     name:'Home',
     component:Home,
+  },
+  {
+    path:'/AddAn',
+    name:'AddAn',
+    component:AddAn,
   },
   {
     path:'/SearchPage',
@@ -53,6 +63,23 @@ const routes = [
       
     ]
   },
+  {
+    path:'/creatBar',
+    name:'creatBar',
+    component:creatBar,
+  },
+  {
+    path:'/hisUserPage',
+    name:'hisUserPage',
+    component:hisUserPage,
+    children:[
+      
+    ]
+  },  
+  {
+    path:'/hisLeaveMes',
+    name:'hisLeaveMes',
+    component:hisLeaveMes},
   {
     path:'/BarPage',
     name:'BarPage',
@@ -73,7 +100,11 @@ const routes = [
     name:'redirct',
     component:redirct,
   },
-  
+  {
+    path:'/Ann',
+    name:'Ann',
+    component:Ann,
+  },
 
 ]
 

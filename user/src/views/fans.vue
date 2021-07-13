@@ -6,18 +6,18 @@
     style="width: 100%" v-loading="loading">
 
     <el-table-column
-      prop="PASSIVEUSERID"
-      label="用户ID">
+      prop="ACTIVEUSERID"
+      label="用户ID"
+      width="180">
     </el-table-column>
     <el-table-column
       prop="NICKNAME"
-      label="用户昵称">
+      label="用户昵称"
+      width="180">
     </el-table-column>
     
     <el-table-column>
-      <template slot-scope="scope">
-              <el-button type="text" @click="lookHisInfo(scope)">查看</el-button>
-            </template>
+
     </el-table-column>
   </el-table>
    <el-pagination
@@ -73,7 +73,7 @@
         this.userID = storeID;
       },
       async getFo(userID){     
-        var url='http://139.196.167.75:5000/api/Follow'+'/'+userID;
+        var url='http://139.196.167.75:5000/api/MyFan'+'/'+userID;
         console.log(url);
       
           await fetch(url, {
@@ -87,14 +87,12 @@
           .then(data => this.store(data));
           this.loading=false;
           console.log("Geted");
-        },
-    lookHisInfo(scope)
-    {
-      this.$router.replace({path:'/hisUserPage',name:'hisUserPage',params:{lookUserId:scope.row.PASSIVEUSERID}});
-      //console.log(scope);
-    }
+        }
     },
+    lookHisInfo()
+    {
 
+    }
     
   }
 </script>

@@ -65,8 +65,8 @@
         // ]
       },
       isLogin:false,
-      number:0,
-      mess:0
+      userIdentity:0,
+      
     };
   },
   methods: {
@@ -75,7 +75,7 @@
       var get=[]
       get=JSON.parse(res);
       console.log(JSON.parse(res));
-      this.mess=get[0].NUM;
+      this.userIdentity=get[0].IDENTITY;
     },
     test(item)
     {
@@ -86,7 +86,7 @@
           USERID: this.ruleForm.user,
           PASSWORD: this.ruleForm.password,
         };
-        await fetch('http://139.196.167.75:5000/api/TodoItems', {
+        await fetch('http://139.196.167.75:5000/api/SignIn', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -97,13 +97,15 @@
           .then(res => res.json())
           .then(res => this.store(res))
           .catch(error => console.log('error is', error));
-          if(this.mess > 0)
+          
+          if(this.userIdentity != null)
           {
-            this.$store.commit('setUserID',this.ruleForm.userID);
             localStorage.setItem('userID',this.ruleForm.user);
             localStorage.setItem('state',true);
+            localStorage.setItem('Identity',this.userIdentity);
             //console.log(sessionStorage.getItem('userID'));
             this.$router.replace({path:'/'});
+            location.reload();
             this.$message("登录成功");
             
           }

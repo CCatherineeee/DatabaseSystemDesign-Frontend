@@ -18,3 +18,55 @@
 </el-row>
 
 </template>
+
+<script>
+export default {
+    data()
+  {
+    return{
+      UserID:'',
+      FavoriteList:[],
+    }
+  },
+  mounted()
+  {
+    this.setUserID();
+    this.getFavorite(this.UserID);
+  },
+  methods:{
+    test:function()
+    {
+      console.log("ok");
+    }, 
+    setUserID()
+    {
+      var storeID = localStorage.getItem("userID");
+      this.UserID = storeID;
+    },
+    storeFavorite(respons)
+    {
+      this.FavoriteList = JSON.parse(respons);
+      console.log(this.ActiveList);
+    },
+    async getFavorite(params)
+    {
+      var url='http://139.196.167.75:5000/api/GetStar'+'/'+params;
+      await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          //body: JSON.stringify(UpdateData)
+        })
+        .then(respons => respons.json())
+        .then(respons => this.storeActive(respons));
+    },
+    openPost(POSTID)
+    {
+      console.log(POSTID);
+    }
+  }
+  
+}
+</script>

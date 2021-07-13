@@ -82,11 +82,11 @@
       }
       else {
         const formData = {
-          userID: this.ruleForm.userID,
-          userName: this.ruleForm.userName,
-          password: this.ruleForm.password
+          USERID: this.ruleForm.userID,
+          NICKNAME: this.ruleForm.userName,
+          PASSWORD: this.ruleForm.password
         };
-        await fetch('http://139.196.167.75:5000/api/TodoItems', {
+        await fetch('http://139.196.167.75:5000/api/Register', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -96,7 +96,11 @@
         })
           .then(
             res => {
-              if(res.ok){console.log(res)}
+              if(res.ok){
+                console.log(res)
+                this.$message('注册成功');
+                this.$router.replace({path:'/Login'});
+                }
               else
               {
                 this.$message('注册失败，用户ID重复');

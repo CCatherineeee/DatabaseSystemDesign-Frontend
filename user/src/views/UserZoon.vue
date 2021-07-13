@@ -9,14 +9,13 @@
     <img src="..\assets\1.jpg" height="180px" width="180px" style="border-radius:50%"/>
     <p><b> {{UserName}} </b></p>
     <el-menu   :router="true" :default-active="$path='/UserPage'" :collapse-transition="true">
-      <el-menu-item index="UserPage" >我的主页</el-menu-item>
+      <el-menu-item index="/activity" >我的主页</el-menu-item>
       <el-menu-item index="EditInfo">修改个人资料</el-menu-item>
       </el-menu>
 </el-aside>
 <el-main>
 
   <div>
-    <button></button>
       <transition name="slide-fade">
       <!--路由占位符-->
       <router-view></router-view>

@@ -1,8 +1,8 @@
 <template>
 <div>
 <el-menu  class="el-menu-demo" mode="horizontal" :router = "true">
-      <el-menu-item index="activity">我的活动</el-menu-item>
-      <el-menu-item index="history">我的历史</el-menu-item>
+      <el-menu-item index="activity">我的发帖</el-menu-item>
+      <el-menu-item index="history">我的评论</el-menu-item>
        <el-menu-item index="favorite">我的收藏</el-menu-item>
        <el-menu-item index="follow">我的关注</el-menu-item>
        <el-menu-item index="fans">我的粉丝</el-menu-item>

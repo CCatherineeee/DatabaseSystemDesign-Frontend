@@ -1,8 +1,7 @@
 <template>
 
-
+<el-scrollbar >
 <el-row>
-  <el-scrollbar >
   <el-col :span="4"  v-for="(o, index) in 10" :key="o" :offset="index % 4 > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px' }">
       
@@ -17,7 +16,7 @@
     </el-card>
     <br>
   </el-col>
-  </el-scrollbar>
-
 </el-row>
+</el-scrollbar>
+
 </template>

@@ -21,7 +21,7 @@
           <div v-for="(AdItem,index) in AdList" :key="index" >
            <div v-if= isShow(index)>
               <el-row class="shadow" style="height:40px">
-                    <el-button type="text" @click= "dialogClick(AdList[index])" id="index"> {{AdItem.Title}} </el-button>           
+                    <el-button type="text" @click= "dialogClick(AdList[index])" id="index"> {{AdItem.ANNOUNCEMENTTITLE}} </el-button>           
                     <el-dialog :title="Title" :visible.sync = "dialogVisible">
                         <p>{{Content}}</p>
                     </el-dialog>
@@ -40,16 +40,23 @@
 
     <el-container style="height:500px;float:left">
       
+      <div class=".el-scrollbar__wrap">
       <el-aside width="250px" class="left">
-          <el-container class="asid-rank">
-            <el-main>
+        
+          <el-container class="asid-rank" style="height:500px">
+            <el-main style="height:500px">
 
               <p><b>贴吧排行</b></p>
 
               <el-col >
-                <el-row v-for="(barItem,index) in bar" :key="index">
+                <el-row v-for="(barItem,index) in AdRankList" :key="index">
                   <span>
-                    <el-button type="text" @click="toBar(barItem.router)">{{index+1}} {{barItem.BarTitle}}</el-button>
+                    <el-col :span="2">
+                      <el-button type="text" @click="toBar(barItem.router)">{{index+1}}</el-button>
+                      </el-col>
+                    <el-col :span="4">
+                    <el-button type="text" @click="toBar(barItem.router)">{{barItem.TIEBAID}}</el-button>
+                    </el-col>
                   </span>
                 </el-row>
               </el-col>
@@ -58,6 +65,7 @@
                 <el-divider></el-divider>
 
       </el-aside>
+      </div>
     </el-container>
       <el-scrollbar style="height:100%;">
         <el-scrollbar>
@@ -183,22 +191,29 @@ export default {
         {
           viewRouter : require('..\\assets\\3.webp'),
         }],
-        AdList:[],
+        AdList:[{},],
+        AdRankList:[],
       }
   },
   mounted(){
     this.getAd('http://139.196.167.75:5000/api/Announcement');
-
+    this.getAdRank('http://139.196.167.75:5000/api/Ranking');
   },
   methods:{
     toBar:function()
     {
-      this.$router.replace({path:'/BarPage'});
+      this.$router.replace({path:'/BarPage',name:'BarPage',params:{barID:1}});
     },
-    test:function(data)
+    /*async getBarRank()
     {
-      console.log(data);
-    },
+      await fetch('', {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+          })
+    },*/
     dialogClick:function(AdItem)
     {
       this.dialogVisible=true;
@@ -207,16 +222,21 @@ export default {
       console.log(this.dialogVisible);
     },
     isShow:function(index){
-      return this.AdList.length-index > 4 ? false: true;
+      return index > 3 ? false: true;
       },
     checkLogin:function()
     {
-      return this.IsLogin;
+      return localStorage.getItem("state");
     },
-    store:function(item)
+    adStore:function(item)
     {
         this.AdList=JSON.parse(item);
         console.log(this.AdList);
+    },
+    rankStore(item)
+    {
+      this.AdRankList=JSON.parse(item);
+      console.log(this.AdRankList);
     },
     async getAd(url)
     {
@@ -228,13 +248,27 @@ export default {
             },
           })
           .then(response => response.json())
-          .then(data => this.store(data));
+          .then(data => this.adStore(data));
+          console.log("Geted");
+      },
+    
+    async getAdRank(url)
+    {
+      await fetch(url, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+          })
+          .then(response => response.json())
+          .then(data => this.rankStore(data));
           console.log("Geted");
 
         }
     }
-
-  }
+}
+    
 
 </script>
 
