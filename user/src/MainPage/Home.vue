@@ -183,32 +183,12 @@ export default {
         {
           viewRouter : require('..\\assets\\3.webp'),
         }],
-        AdList:[
-          {
-            Title:"重要通知1",
-            Content:"要放假啦！"
-          },
-          {
-            Title:"重要通知2",
-            Content:"要放假啦！"
-          },
-          {Title:"重要通知3",
-            Content:"当地时间7月10日，海地第一夫人马蒂娜·莫伊兹在遇袭3天后首次发声，\n在其社交媒体上发布了一段2分20秒的音频消息。在语音中，她指责“雇佣兵”刺杀了总统莫伊兹，并认为其犯罪动机与总统莫伊兹打算举行新宪法公投有关。马蒂娜·莫伊兹在袭击中受伤，目前正在美国迈阿密接受治疗。截至目前，在涉嫌刺杀总统莫伊兹的28人中，警方已抓捕20人，其中包括18名哥伦比亚人和2两名海地裔美国人，另击毙3人，仍有5人在逃。（总台记者 侯佳琦）"
-          },
-          {
-            Title:"重要通知4",
-            Content:"要放假啦！"
-          },
-           {
-            Title:"重要通知5",
-            Content:"要放假啦！"
-          },
-           {
-            Title:"重要通知6",
-            Content:"要放假啦！"
-          }
-        ],
+        AdList:[],
       }
+  },
+  mounted(){
+    this.getAd('http://139.196.167.75:5000/api/Announcement');
+
   },
   methods:{
     toBar:function()
@@ -222,8 +202,8 @@ export default {
     dialogClick:function(AdItem)
     {
       this.dialogVisible=true;
-      this.Title=AdItem.Title;
-      this.Content=AdItem.Content;
+      this.Title=AdItem.ANNOUNCEMENTTITLE;
+      this.Content=AdItem.ANNOUNCEMENTCONTENT;
       console.log(this.dialogVisible);
     },
     isShow:function(index){
@@ -233,9 +213,28 @@ export default {
     {
       return this.IsLogin;
     },
+    store:function(item)
+    {
+        this.AdList=JSON.parse(item);
+        console.log(this.AdList);
+    },
+    async getAd(url)
+    {
+      await fetch(url, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+          })
+          .then(response => response.json())
+          .then(data => this.store(data));
+          console.log("Geted");
+
+        }
+    }
 
   }
-}
 
 </script>
 

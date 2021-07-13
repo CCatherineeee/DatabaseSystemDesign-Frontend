@@ -25,7 +25,7 @@
             <el-button>忘记密码</el-button>
           </div>
         </el-form>
-        {{mess}}
+ 
       </div>
     </div>
   </div>
@@ -83,8 +83,8 @@
     },
     async submitLoginForm() {
       const formData = {
-          userID: this.ruleForm.user,
-          Password: this.ruleForm.password,
+          USERID: this.ruleForm.user,
+          PASSWORD: this.ruleForm.password,
         };
         await fetch('http://139.196.167.75:5000/api/TodoItems', {
           method: 'POST',
@@ -98,14 +98,21 @@
           .then(res => this.store(res))
           .catch(error => console.log('error is', error));
           if(this.mess > 0)
-                {
-                  this.$message("登录成功")
-                  }
-                else
-                {
-                  alert("登录失败");}
-              }
+          {
+            this.$store.commit('setUserID',this.ruleForm.userID);
+            localStorage.setItem('userID',this.ruleForm.user);
+            localStorage.setItem('state',true);
+            //console.log(sessionStorage.getItem('userID'));
+            this.$router.replace({path:'/'});
+            this.$message("登录成功");
+            
+          }
+          else
+          {
+            this.$message("登录失败")}
+          }
             //this.$router.push({name:'Login'})
+           
             
     },
     resetForm(formName) {

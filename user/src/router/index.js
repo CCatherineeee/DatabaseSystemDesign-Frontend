@@ -12,6 +12,7 @@ import SearchPage from '../MainPage/Search.vue'
 import BarPage from '../MainPage/bar.vue'
 import Login from '../MainPage/Login.vue'
 import Register from '../MainPage/Register.vue'
+import redirct from '../views/redirct.vue'
 
 Vue.use(VueRouter)
 
@@ -66,6 +67,11 @@ const routes = [
     path:'/Register',
     name:'Register',
     component:Register,
+  },
+  {
+    path:'/redirct',
+    name:'redirct',
+    component:redirct,
   },
   
 

@@ -16,7 +16,7 @@
 <el-main>
 
   <div>
-    <button @click="postData('http://175.27.240.116:5000/api/TodoItems')"></button>
+    <button></button>
       <transition name="slide-fade">
       <!--路由占位符-->
       <router-view></router-view>
@@ -31,36 +31,28 @@
 <script>
 // @ is an alias to /src
 export default {
+  mounted(){
+   this.setUserName();
+  },
     methods: {
     EditInfo:function()
     {
       this.$router.replace({path: '/EditInfo'})
     },
-    postData:function(url)
-      {
-        const item = {
-          Id:1,
-          Name: "123",
-          IsComplete: true};
-        fetch(url, {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item)
-          });
-          console.log("posted");
-        }
-        
-      },
+     setUserName()
+    {
+      var storeID = localStorage.getItem("userID");
+      this.UserName = storeID;
+    }
+    },
+    
   data()
   {
     return{
-      UserName:'hello'
+      UserName:""
     }
   }
-}
+    }
 </script>
 
 <style>

@@ -14,17 +14,20 @@
         </el-col>
     <el-menu mode="horizontal" :router = "true" background-color="#2e78c2" text-color="white" active-text-color="yellow" style="float:right">
       <el-menu-item index="/">首页</el-menu-item>
-        <el-submenu index="2" >
+        <el-submenu index="2" v-if = "UserState">
                 <template slot="title">消息</template>
                 <el-menu-item index="/CommentPage">评论</el-menu-item>
                 <el-menu-item index="/ReplyPage">回复</el-menu-item>
                 <el-menu-item index="/priMessage">私信</el-menu-item>
         </el-submenu>
-       <el-submenu index="top">
+        <el-menu-item v-if = "!UserState"  index="/Login">登录/注册</el-menu-item>
+
+       <el-submenu index="top" v-if = "UserState">
          <template #title>个人中心</template>
-            <el-menu-item index="/Login">登录/注册</el-menu-item>
+
             <el-menu-item index="/activity">个人主页</el-menu-item>
-            <el-menu-item index="Logout">注销</el-menu-item>
+            <el-menu-item index="Logout" @click="Logout()">注销</el-menu-item>
+    
         </el-submenu>
     </el-menu>
     </el-col>
@@ -37,10 +40,30 @@
 </template>
 <script>
 export default {
+  mounted()
+  {
+    this.setUserState();
+  },
   methods:{
      search:function() {
         this.$router.replace({path: '/SearchPage'});
       },
+    setUserState()
+    {
+      var state = localStorage.getItem("state");
+      this.UserState = state;
+    },
+    Logout()
+    {
+      localStorage.clear();
+      this.$router.replace({path: '/redirct'});
+      location.reload();
+    }
+  },
+  data(){
+    return{
+      UserState:false,
+    }
   }
 }
 </script>
